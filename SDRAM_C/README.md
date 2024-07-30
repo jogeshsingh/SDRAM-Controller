@@ -4,6 +4,11 @@
   mounted on `ARTIX-A7 FPGA Board`
 
 
+## FSM Controller For SDRAM
+
+
+
+
 
 ## Implementation Details
 
