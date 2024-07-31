@@ -35,11 +35,15 @@
 
     - **BURST - 2 Write and read Access**
    
+
+      > Write burst - 2 
+
       ![burst_2_w](sim_img/burst_2.jpg)
 
 
       ![burst_2_r](sim_img/burst_2_read.jpg)
-
+  
+      > Read burst - 2
 
     - **BURST - 4 Write and read Access**
 
