@@ -33,35 +33,27 @@
 
 
 
-      - **BURST - 2 Write and read Access**
+      - **BURST of 2 data (Write and read Access)**
    
 
-       `Write burst - 2` 
+       `Write burst on sdr_dq_out` 
 
       ![burst_2_w](sim_img/burst_2.jpg)
 
      
-      `Read burst - 2`
+      `Read burst on sdr_dq_in`
 
       ![burst_2_r](sim_img/burst_2_read.jpg)
    
     
-     - **BURST - 4 Write and read Access**
+     - **BURST of 4 data (Write and read Access)**
 
 
 
-     - **BURST - 8 Write and read Access**
+     - **BURST of 8 data (Write and read Access)**
 
 
 
-     - **BURST -2 Read Access**
-
-
-
-    - **BURST -4 Read Access**
-
-
-    - **BURST -8 Read Access**
 
 
   - Full page access
