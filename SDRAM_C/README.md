@@ -33,15 +33,19 @@
 
 
 
-    - **BURST - 2 Write Access**
+    - **BURST - 2 Write and read Access**
+   
+      ![burst_2_w](sim_img/burst_2.jpg)
+
+
+      ![burst_2_r](sim_img/burst_2_read.jpg)
+
+
+    - **BURST - 4 Write and read Access**
 
 
 
-    - **BURST - 4 Write Access**
-
-
-
-    - **BURST - 8 Write Access**
+    - **BURST - 8 Write and read Access**
 
 
 
