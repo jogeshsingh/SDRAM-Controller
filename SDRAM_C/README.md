@@ -37,7 +37,7 @@
        
       - `Read burst` is  on `sdr_dq_in`
       
-      - **BURST of 2 data (Write and read Access)**
+    - **BURST of 2 data (Write and read Access)**
 
        `Write burst`
 
