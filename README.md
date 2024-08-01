@@ -3,29 +3,29 @@
 
 ## Directories
 
-  - SDRAM_C**
+  - `SDRAM_C`
     
-    - Constraints
+    - `Constraints`
     
-    - rtl
+    - `rtl`
          
-    - sim
+    - `sim`
          
-    - sim_img
+    - `sim_img`
          
-    - README.md
+    - `README.md`
 
 **Source files**
 
-  -> rtl
+  - `rtl`
 
-    ->  Sdram_controller.v
+    - `Sdram_controller.v`
 
-    ->  top_sdram_controller.v
+    -  `top_sdram_controller.v`
 
-    ->  wr_rd_data_fsm.v
+    -  `wr_rd_data_fsm.v`
 
-    -> sim
+  - `sim`
 
-    ->  top_sdram_tb.v
+    -  `top_sdram_tb.v`
   
