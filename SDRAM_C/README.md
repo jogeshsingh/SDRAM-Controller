@@ -61,7 +61,14 @@
 
      - **BURST of 8 data (Write and read Access)**
 
+       `Write burst`
 
+       ![burst_2_w](sim_img/burst_8_w.jpg)
+     
+       `Read burst`
+
+       ![burst_2_r](sim_img/burst_8_rd.jpg)
+   
 
 
 
