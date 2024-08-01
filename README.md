@@ -4,6 +4,7 @@
 
  [DOC](https://www.alldatasheet.com/datasheet-pdf/pdf/75870/MICRON/MT48LC16M4A2.html)
 
+
 ## Directories
 
   - `SDRAM_C`
