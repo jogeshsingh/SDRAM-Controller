@@ -1,6 +1,6 @@
 ## SDRAM Controller
 
-> This Repository Contains a SDRAM Controller Verilog HDL Code for Interfacing SDRAM(Readin from and Writing to)
+> This Repository Contains a SDRAM Controller Verilog HDL Code for Interfacing SDRAM(Reading from and Writing to `SDRAM`)
   mounted on `ARTIX-A7 FPGA Board`
 
 
@@ -32,7 +32,7 @@
     - This section describes the timing for `reading` and `writing` from/to multiple array location in `SDRAM` using `burst mode`
 
        **NOTE**
-       
+
        `Write burst on sdr_dq_out` 
        
        `Read burst on sdr_dq_in`
