@@ -6,13 +6,30 @@
 
 module top_sdram_controller
 #(
-
+   /////////////////////////////////
+   ///////////////////////////////////
+   // write burst length in count
+   // like for BL = 2 , = 2 
+   // for BL = 010 = 4
+   // for BL = 011 = 8
+   parameter wr_burst_len  = 8 , 
+   parameter rd_burst_len  = 8 , 
+   // BURST LENGTH , Load mode register parameters
+   // 001 = 2 burst of data
+   // 010 = 4 burst of data 
+   // 011 = 8 burst of data
+   // 100 = full page 
+     
+   parameter BL                      =  3'b011  , 
+   
+   
+   // Timing Parameters
 	parameter T_RP                    =  4,     // precharge command period
 	parameter T_RC                    =  6,     // ACTIVE-to-ACTIVE command period
 	parameter T_MRD                   =  6,     // LOAD MODE REGISTER command to ACTIVE or REFRESH command
 	parameter T_RCD                   =  2,     // ACTIVE-to-READ or WRITE delay
 	parameter T_WR                    =  3,     // Write Recovery Time
-	parameter CASn                    =  3,    
+	parameter CASn                    =  2,      // CAS Latency
 	parameter SDR_BA_WIDTH            =  2,       // SDRAM Bus Address width
 	parameter SDR_ROW_WIDTH           =  13,      // SDRAM Row Address width
 	parameter SDR_COL_WIDTH           =  9,      // SDRAM Column Address width
@@ -66,8 +83,10 @@ module top_sdram_controller
     
      wire wr_burst_req  ;
     
-     localparam wr_burst_len  = 3;
-     localparam rd_burst_len  = 3;
+    
+    
+     
+     /////////////////////////////////////////////////
      
      assign o_led_receive_done  = (rd_burst_data !=0 && rd_burst_data_valid) ;
     
@@ -120,6 +139,7 @@ module top_sdram_controller
 	  .T_RCD                   (T_RCD               ) ,   
 	  .T_WR                    (T_WR                ) ,   
 	  .CASn                    (CASn                ) ,   
+	  .BL                      (BL                  ) ,      
 	  .SDR_BA_WIDTH            (SDR_BA_WIDTH        ) ,   
 	  .SDR_ROW_WIDTH           (SDR_ROW_WIDTH       ) ,   
 	  .SDR_COL_WIDTH           (SDR_COL_WIDTH       ) ,   

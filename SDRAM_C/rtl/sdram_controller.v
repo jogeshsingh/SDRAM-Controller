@@ -7,7 +7,8 @@ module sdram_core
 	parameter T_MRD                   =  6,     // LOAD MODE REGISTER command to ACTIVE or REFRESH command
 	parameter T_RCD                   =  2,     // ACTIVE-to-READ or WRITE delay
 	parameter T_WR                    =  3,     // Write Recovery Time
-	parameter CASn                    =  3,    
+	parameter CASn                    =  3'b010,
+	parameter BL                      =  3'b001 ,     
 	parameter SDR_BA_WIDTH            =  2,       // SDRAM Bus Address width
 	parameter SDR_ROW_WIDTH           =  13,      // SDRAM Row Address width
 	parameter SDR_COL_WIDTH           =  9,      // SDRAM Column Address width
@@ -128,12 +129,12 @@ wire end_trcd      =  (cnt_clk_r   == T_RCD-1) ? 1'b1 : 1'b0;
 wire end_tcl       =  (cnt_clk_r   == CASn-1) ? 1'b1 : 1'b0;
 
 //(*KEEP = "true"*)
-wire end_rdburst   =  (cnt_clk_r   == rd_burst_len-4) ? 1'b1 : 1'b0;
+wire end_rdburst   =  (cnt_clk_r   == rd_burst_len-1) ? 1'b1 : 1'b0;
 
 wire end_tread     =  (cnt_clk_r   == rd_burst_len+2) ? 1'b1 : 1'b0;
 
 //(*KEEP = "true"*)
-wire end_wrburst   =  (cnt_clk_r   == wr_burst_len-1) ? 1'b1 : 1'b0;
+wire end_wrburst   =  (cnt_clk_r   == (wr_burst_len-1)) ? 1'b1 : 1'b0;
 
 wire end_twrite    =  (cnt_clk_r   == wr_burst_len-1) ? 1'b1 : 1'b0;
 wire end_twr       =  (cnt_clk_r   == T_WR) ? 1'b1 : 1'b0;
@@ -157,7 +158,8 @@ begin
 	end
 end
 
-assign wr_burst_finish = ~wr_burst_data_req_d0 & wr_burst_data_req_d1;
+//assign wr_burst_finish = ~wr_burst_data_req_d0 & wr_burst_data_req_d1;
+assign wr_burst_finish = (cnt_clk_r   == (wr_burst_len-1)) ? 1'b1 : 1'b0;
 assign rd_burst_finish = ~rd_burst_data_valid_d0 & rd_burst_data_valid_d1;
 assign rd_burst_data = sdr_dq_in;
 
@@ -225,7 +227,7 @@ begin
 				S_INIT_TRF2:
 					state <= (end_trfc) ?  S_INIT_MRS : S_INIT_TRF2;       //Wait for second self refresh end T_RC clock cycles
 				S_INIT_MRS:
-					state <= S_INIT_TMRD;//Mode register set£¨MRS£©
+					state <= S_INIT_TMRD;//Mode register setÂ£Â¨MRSÂ£Â©
 				S_INIT_TMRD:
 					state <= (end_tmrd) ? S_INIT_DONE : S_INIT_TMRD;      //wait mode register setting is complete with T_MRD clock cycles
 				S_INIT_DONE:
@@ -353,10 +355,10 @@ always@(posedge clk or posedge rst)
 begin
 	if(rst == 1'b1)
 		sdr_dq_oe <= 1'b0;
-	else if((state == S_WRITE) | (state == S_WD))
-		sdr_dq_oe <= 1'b1;
-	else
-		sdr_dq_oe <= 1'b0;
+	//else if((state == S_WRITE) | (state == S_WD)  )             //((state == S_WRITE) | (state == S_WD))        //&& (cnt_clk_r != (wr_burst_len-1)
+		sdr_dq_oe <= wr_burst_data_req_d0 ;     //1'b1
+	//else
+	//	sdr_dq_oe <= 1'b0;
 end
 
 //Reads data from the SDRAM
@@ -404,9 +406,9 @@ begin
 					3'b000,
 					1'b0,           //Operation mode setting (set here to A9=0, ie burst read / burst write) , (set A9 = 1, for single location access)
 					2'b00,          //Operation mode setting ({A8, A7}=00), the current operation is set for mode register
-					3'b010,         //CAS latency setting
+					CASn,         //CAS latency setting
 					1'b0,           //Burst mode ( 0 - sequential , 1 - interleaved)
-					3'b010         //Burst length ,full page  (010  - 3 bursts of data ) 
+					BL         //Burst length ,full page  (011  - 8 bursts of data ) 
 					};
 			end
 			S_IDLE,S_TRCD,S_CL,S_TRFC,S_TWR,S_TRP: 
@@ -434,10 +436,10 @@ begin
 				else begin
 					 {ras_n_r,cas_n_r,we_n_r} <= 3'b111;
 				  //  {ras_n_r,cas_n_r,we_n_r} <= 3'b101;
-				  //  sdram_addr_r <= {4'b0000,sys_addr[8:3]};//Column address A10=0, set read enable, without auto precharge
-				   // sdram_ba_r <= sys_addr[APP_ADDR_WIDTH - 1:APP_ADDR_WIDTH - SDR_BA_WIDTH];  
-					sdram_ba_r <= {SDR_BA_WIDTH{1'b1}};   //no op
-					sdram_addr_r <= {SDR_ROW_WIDTH{1'b1}};  // no op
+				   // sdram_addr_r <= {4'b0000,sys_addr[8:3]};//Column address A10=0, set read enable, without auto precharge
+				  //  sdram_ba_r <= sys_addr[APP_ADDR_WIDTH - 1:APP_ADDR_WIDTH - SDR_BA_WIDTH];  
+					 sdram_ba_r <= {SDR_BA_WIDTH{1'b1}};   //no op
+					 sdram_addr_r <= {SDR_ROW_WIDTH{1'b1}};  // no op
 				end
 			end
 			S_WRITE: 
@@ -451,8 +453,8 @@ begin
 				if(end_wrburst) {ras_n_r,cas_n_r,we_n_r} <= 3'b110;
 				else begin
 					{ras_n_r,cas_n_r,we_n_r} <= 3'b111;
-					//sdram_addr_r <= {4'b0000,sys_addr[8:3]};//Column address A10=0, set write enable, without auto precharge
-				   //sdram_ba_r <= sys_addr[APP_ADDR_WIDTH - 1:APP_ADDR_WIDTH - SDR_BA_WIDTH];  
+//					sdram_addr_r <= {4'b0000,sys_addr[8:2]};//Column address A10=0, set write enable, without auto precharge
+//				   sdram_ba_r <= sys_addr[APP_ADDR_WIDTH - 1:APP_ADDR_WIDTH - SDR_BA_WIDTH];  
 
 					sdram_ba_r <= {SDR_BA_WIDTH{1'b1}};  // NO OP
 					sdram_addr_r <= {SDR_ROW_WIDTH{1'b1}};  // NO OP
