@@ -18,6 +18,8 @@
 
 ## Implementation Details
 
+  - Below are the implemented design outputs from/to `FPGA` to `SDRAM`in `ILA` -: 
+
   - Single Mode Acess
   
     - This section describes the timing for `reading` and `writing` from/to single array location in `SDRAM`
