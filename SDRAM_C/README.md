@@ -8,6 +8,12 @@
 
 
 
+## Simulation Details
+
+
+   - `Burst - 8 - on incrementing addresses`
+
+    ![SIM_BURST_8](sim_img/sim_burst_8_continuous.jpg)  
 
 
 ## Implementation Details
@@ -24,6 +30,9 @@
 
 
     - **Single Read Access**
+
+
+
 
 
 
@@ -70,6 +79,6 @@
        ![burst_2_r](sim_img/burst_8_rd.jpg)
    
 
-
+ 
 
   - Full page access

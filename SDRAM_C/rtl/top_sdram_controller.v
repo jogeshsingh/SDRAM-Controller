@@ -12,17 +12,20 @@ module top_sdram_controller
    // like for BL = 2 , = 2 
    // for BL = 010 = 4
    // for BL = 011 = 8
+   parameter BL                      =  3'b011  , 
+   //    BURST_ACCESS_TYPE = 2'b00 , -> burst type ->  2, 4, 8 
+   //    BURST_ACCESS_TYPE = 2'b01 , -> burst type -> 1 or single access location
+   //    BURST_ACCESS_TYPE = 2'b10 , -> burts type -> continuous burst  
+   parameter BURST_ACCESS_TYPE = 2'b00 ,
+   
+   // BURST LENGTH , Load mode register parameters
+   // for BL = 001 , {wr_burst_len,rd_burst_len} => 2 burst of data
+   // for BL = 010 , {wr_burst_len,rd_burst_len} => 4 burst of data 
+   // for BL = 011 , {wr_burst_len,rd_burst_len} => 8 burst of data
+   // 100 = full page 
    parameter wr_burst_len  = 8 , 
    parameter rd_burst_len  = 8 , 
-   // BURST LENGTH , Load mode register parameters
-   // 001 = 2 burst of data
-   // 010 = 4 burst of data 
-   // 011 = 8 burst of data
-   // 100 = full page 
      
-   parameter BL                      =  3'b011  , 
-   
-   
    // Timing Parameters
 	parameter T_RP                    =  4,     // precharge command period
 	parameter T_RC                    =  6,     // ACTIVE-to-ACTIVE command period
@@ -42,10 +45,7 @@ module top_sdram_controller
     
    input                             clk,
 	input                             rst,                 //reset signal,high for reset
-	
 
-	
-	
 	// SRAM signals
    output                            sdram_clk,         //sdram clock
 	output                            sdram_cke,           //clock enable
@@ -64,24 +64,23 @@ module top_sdram_controller
     );
   
     	//read 
-    //(*KEEP = "true"*)
-     wire [SDR_DQ_WIDTH-1:0]          rd_burst_data ;     //  read data to internal
-	 //(*KEEP = "true"*)
-	  wire                             rd_burst_data_valid ;//  read data enable (valid)
-    
-    
-      wire self_refresh_done_st ; 
-      wire wrt_done             ;
-      wire precharge_dn         ;
-      wire rd_dne               ;
-      wire wr_burst_data_req    ;
-      wire wr_burst_finish      ;
+     //(*KEEP = "true"*)
+      wire [SDR_DQ_WIDTH-1:0]          rd_burst_data ;     //  read data to internal
+	  //(*KEEP = "true"*)
+	   wire                             rd_burst_data_valid ;//  read data enable (valid)
+      
+      wire self_refresh_done_st               ; 
+      wire wrt_done                           ;
+      wire precharge_dn                       ;
+      wire rd_dne                             ;
+      wire wr_burst_data_req                  ;
+      wire wr_burst_finish                    ;
       
       
-     wire [SDR_DQ_WIDTH-1:0] wr_data;
-     wire [APP_ADDR_WIDTH-1:0 ] wr_burst_addr ;
-    
-     wire wr_burst_req  ;
+      wire [SDR_DQ_WIDTH-1:0]    wr_data       ;
+      wire [APP_ADDR_WIDTH-1:0 ] wr_burst_addr ;
+      wire [APP_ADDR_WIDTH-1:0 ] rd_burst_addr ;
+      wire wr_burst_req                        ;
     
     
     
@@ -90,14 +89,15 @@ module top_sdram_controller
      
      assign o_led_receive_done  = (rd_burst_data !=0 && rd_burst_data_valid) ;
     
-    wire clk_out1;
+     wire clk_out1;
     
     clk_wiz_0 clk_wizard
-   (
+    (
     // Clock out ports
     .clk_out1(clk_out1),     // output clk_out1
    // Clock in ports
-    .clk_in1(clk));      // input clk_in1
+    .clk_in1(clk)
+     );      // input clk_in1
 
  
 // 	 //sdram_clk(clk input to sdram) is 180 degrees lagging from main clock to solve the hold-setup time requirements of sdram
@@ -155,13 +155,13 @@ module top_sdram_controller
 	          .wr_burst_req (wr_burst_req),        //  write request
 	          .wr_burst_data(wr_data),       //  write data
 	          .wr_burst_len (wr_burst_len),        //  write data length, ahead of wr_burst_req
-	          .wr_burst_addr(0),       //  write base address of sdram write buffer
+	          .wr_burst_addr(wr_burst_addr),       //  write base address of sdram write buffer
 	          .wr_burst_data_req(wr_burst_data_req),   //  wrtie data request, 1 clock ahead
 	          .wr_burst_finish(wr_burst_finish),     //  write data is end
 	          
 	          .rd_burst_req  (rd_burst_req),        //  read request
 	          .rd_burst_len  (rd_burst_len),        //  read data length, ahead of rd_burst_req
-	          .rd_burst_addr (0),       //  read base address of sdram read buffer
+	          .rd_burst_addr (rd_burst_addr),       //  read base address of sdram read buffer
 	          .rd_burst_data (rd_burst_data),       //  read data to internal
 	          .rd_burst_data_valid(rd_burst_data_valid), //  read data enable (valid)
 	          .rd_burst_finish(),     //  read data is end
@@ -186,7 +186,17 @@ module top_sdram_controller
 
  
  
-   wr_rd_data_fsm
+   wr_rd_data_fsm  
+    #(.BURST_ACCESS_TYPE (BURST_ACCESS_TYPE), 
+          //    BURST_ACCESS_TYPE = 2'b00 , -> burst type ->  2, 4, 8 
+          //    BURST_ACCESS_TYPE = 2'b01 , -> burst type -> 1 or single access location
+          //    BURST_ACCESS_TYPE = 2'b10 , -> burts type -> continuous burst  
+     .BURST_LEN (BL)
+           // BURST_LEN = 2'b00 -> 1 (single access location) 
+           // BURST_LEN = 2'b01 -> 2 (burst of length - 2 )
+           // BURST_LEN = 2'b10 -> 4 (burst of length - 4 )
+           // BURST_LEN = 2'b11 -> 8 (burst of length - 8 )
+     ) 
      uo_wr_fsm(
              .i_clk (clk_out1),
              .i_rst (rst), 
@@ -199,7 +209,8 @@ module top_sdram_controller
              .o_wr_req           (wr_burst_req) , 
              .o_rd_req           (rd_burst_req) , 
              .wr_data            (wr_data)  , 
-             .wr_burst_addr      ()
+             .wr_burst_addr      (wr_burst_addr),
+             .rd_burst_addr      (rd_burst_addr)
              );
 
 

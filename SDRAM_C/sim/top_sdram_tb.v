@@ -22,6 +22,27 @@
 
 module top_sdram_tb();
     
+   
+   // write burst length in count
+   // like for BL = 2 , = 2 
+   // for BL = 010 = 4
+   // for BL = 011 = 8
+  parameter BL                =  3'b011   ;
+   
+  //    BURST_ACCESS_TYPE = 2'b00 , -> burst type ->  2, 4, 8 
+  //    BURST_ACCESS_TYPE = 2'b01 , -> burst type -> 1 or single access location
+  //    BURST_ACCESS_TYPE = 2'b10 , -> burts type -> continuous burst  
+  parameter BURST_ACCESS_TYPE =  2'b00    ;
+  
+   // BURST LENGTH , Load mode register parameters
+   // 001 = 2 burst of data
+   // 010 = 4 burst of data 
+   // 011 = 8 burst of data
+   // 100 = full page 
+   
+  parameter wr_burst_len      = 8         ; 
+  parameter rd_burst_len      = 8         ;   
+  
      // Parameters
   parameter T_RP = 4;
   parameter T_RC = 6;
@@ -66,6 +87,28 @@ module top_sdram_tb();
 
   // Instantiate the Unit Under Test (UUT)
   top_sdram_controller #(
+  
+   /////////////////////////////////
+   ///////////////////////////////////
+   // write burst length in count
+   // like for BL = 2 , = 2 
+   // for BL = 010 = 4
+   // for BL = 011 = 8
+   .BL                (BL)  , 
+   //    BURST_ACCESS_TYPE = 2'b00 , -> burst type ->  2, 4, 8 
+   //    BURST_ACCESS_TYPE = 2'b01 , -> burst type -> 1 or single access location
+   //    BURST_ACCESS_TYPE = 2'b10 , -> burts type -> continuous burst  
+   .BURST_ACCESS_TYPE (BURST_ACCESS_TYPE) ,
+   
+   // BURST LENGTH , Load mode register parameters
+   // 001 = 2 burst of data
+   // 010 = 4 burst of data 
+   // 011 = 8 burst of data
+   // 100 = full page 
+   .wr_burst_len  ( wr_burst_len ) , 
+   .rd_burst_len  ( rd_burst_len ) , 
+   
+   
     .T_RP(T_RP),
     .T_RC(T_RC),
     .T_MRD(T_MRD),

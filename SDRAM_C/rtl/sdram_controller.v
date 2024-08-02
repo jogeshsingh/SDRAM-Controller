@@ -1,3 +1,5 @@
+///A0–A8 (x16) select the starting column for full page burst
+
 `timescale 1ns / 1ps
 module sdram_core
 #
@@ -15,7 +17,10 @@ module sdram_core
 	parameter SDR_DQ_WIDTH            =  16,      //   // SDRAM Data In/Out width
 	parameter SDR_DQM_WIDTH           =  SDR_DQ_WIDTH/8,    //DQM is sampled HIGH and is an input mask signal for write accesses and an output enable signal for read accesses.
 	parameter APP_ADDR_WIDTH          =  SDR_BA_WIDTH + SDR_ROW_WIDTH + SDR_COL_WIDTH,
-	parameter APP_BURST_WIDTH         =  10  
+	parameter APP_BURST_WIDTH         =  10  ,
+
+   parameter BURST_OR_SINGLE_ACCESS_A9 = 1'b0       // A9 = 0 , for read/write access , A9 = 1 , for single location access            
+
 )
 (
 	input                             clk,
@@ -404,11 +409,11 @@ begin
 				sdram_ba_r <= {SDR_BA_WIDTH{1'b0}};  
 				sdram_addr_r <= {
 					3'b000,
-					1'b0,           //Operation mode setting (set here to A9=0, ie burst read / burst write) , (set A9 = 1, for single location access)
+					BURST_OR_SINGLE_ACCESS_A9,           //Operation mode setting (set here to A9=0, ie burst read / burst write) , (set A9 = 1, for single location access)
 					2'b00,          //Operation mode setting ({A8, A7}=00), the current operation is set for mode register
 					CASn,         //CAS latency setting
 					1'b0,           //Burst mode ( 0 - sequential , 1 - interleaved)
-					BL         //Burst length ,full page  (011  - 8 bursts of data ) 
+					BL         //Burst length , full page   
 					};
 			end
 			S_IDLE,S_TRCD,S_CL,S_TRFC,S_TWR,S_TRP: 
@@ -426,8 +431,15 @@ begin
 			S_READ: 
 			begin
 				{ras_n_r,cas_n_r,we_n_r} <= 3'b101;
-				sdram_ba_r <= sys_addr[APP_ADDR_WIDTH - 1:APP_ADDR_WIDTH - SDR_BA_WIDTH];  
-				sdram_addr_r <= {4'b0000,sys_addr[8:3]};//Column address A10=0, set read enable, without auto precharge
+				sdram_ba_r <= sys_addr[APP_ADDR_WIDTH - 1:APP_ADDR_WIDTH - SDR_BA_WIDTH]; 
+				     case (BL)
+				3'b000 : sdram_addr_r <= {4'b0000,sys_addr[8:0]};  // A0-A8 (x16) select the unique column to be accessed for single access (a.k.a BL = 1)
+			   3'b001 : sdram_addr_r <= {4'b0000,sys_addr[8:1]};  // A1-A8 (x16) select the burst length BL = 2 
+				3'b001 : sdram_addr_r <= {4'b0000,sys_addr[8:2]};  // A2-A8 (x16) select the burst length BL = 4 
+			   3'b001 : sdram_addr_r <= {4'b0000,sys_addr[8:3]};  // A3-A8 (x16) select the burst length BL = 8 
+			   3'b001 : sdram_addr_r <= {4'b0000,sys_addr[8:0]};  // A0-A8 (x16) select the burst length BL = Continuous page
+			   default : sdram_addr_r <= {SDR_ROW_WIDTH{1'b1}};   // default case 
+			   endcase 
 			end
 			S_RD: 
 			begin
@@ -435,9 +447,6 @@ begin
 					 {ras_n_r,cas_n_r,we_n_r} <= 3'b110;
 				else begin
 					 {ras_n_r,cas_n_r,we_n_r} <= 3'b111;
-				  //  {ras_n_r,cas_n_r,we_n_r} <= 3'b101;
-				   // sdram_addr_r <= {4'b0000,sys_addr[8:3]};//Column address A10=0, set read enable, without auto precharge
-				  //  sdram_ba_r <= sys_addr[APP_ADDR_WIDTH - 1:APP_ADDR_WIDTH - SDR_BA_WIDTH];  
 					 sdram_ba_r <= {SDR_BA_WIDTH{1'b1}};   //no op
 					 sdram_addr_r <= {SDR_ROW_WIDTH{1'b1}};  // no op
 				end
@@ -446,16 +455,20 @@ begin
 			begin
 				{ras_n_r,cas_n_r,we_n_r} <= 3'b100;
 				sdram_ba_r <= sys_addr[APP_ADDR_WIDTH - 1:APP_ADDR_WIDTH - SDR_BA_WIDTH];  
-				sdram_addr_r <= {4'b0000,sys_addr[8:3]};//Column address A10=0, set write enable, without auto precharge
+				case (BL)
+				3'b000 : sdram_addr_r <= {4'b0000,sys_addr[8:0]};  // A0-A8 (x16) select the unique column to be accessed for single access (a.k.a BL = 1)
+			   3'b001 : sdram_addr_r <= {4'b0000,sys_addr[8:1]};  // A1-A8 (x16) select the burst length BL = 2 
+				3'b001 : sdram_addr_r <= {4'b0000,sys_addr[8:2]};  // A2-A8 (x16) select the burst length BL = 4 
+			   3'b001 : sdram_addr_r <= {4'b0000,sys_addr[8:3]};  // A3-A8 (x16) select the burst length BL = 8 
+			   3'b001 : sdram_addr_r <= {4'b0000,sys_addr[8:0]};  // A0-A8 (x16) select the burst length BL = Continuous page
+			   default : sdram_addr_r <= {SDR_ROW_WIDTH{1'b1}};   // default case 
+			   endcase 
 			end
 			S_WD: 
 			begin
 				if(end_wrburst) {ras_n_r,cas_n_r,we_n_r} <= 3'b110;
 				else begin
 					{ras_n_r,cas_n_r,we_n_r} <= 3'b111;
-//					sdram_addr_r <= {4'b0000,sys_addr[8:2]};//Column address A10=0, set write enable, without auto precharge
-//				   sdram_ba_r <= sys_addr[APP_ADDR_WIDTH - 1:APP_ADDR_WIDTH - SDR_BA_WIDTH];  
-
 					sdram_ba_r <= {SDR_BA_WIDTH{1'b1}};  // NO OP
 					sdram_addr_r <= {SDR_ROW_WIDTH{1'b1}};  // NO OP
 				end

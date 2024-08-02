@@ -19,11 +19,22 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-`define RAM_ADDR_W 24
+`define APP_ADDR_WIDTH 24
 //`define BURST_LEN 2
 `define DQ_WIDTH 16
 
-module wr_rd_data_fsm(
+module wr_rd_data_fsm
+# (parameter BURST_ACCESS_TYPE = 2'b00, 
+          // if BURST_ACCESS_TYPE = 2'b00 , -> burst type 
+          //    BURST_ACCESS_TYPE = 2'b01 , -> single access location
+          //    BURST_ACCESS_TYPE = 2'b10 , -> continuous burst  
+   parameter BURST_LEN = 2'b00 
+           // BURST_LEN = 2'b00 -> 1 (single access location) 
+           // BURST_LEN = 2'b01 -> 2 (burst of length - 2 )
+           // BURST_LEN = 2'b10 -> 4 (burst of length - 4 )
+           // BURST_LEN = 2'b11 -> 8 (burst of length - 8 )
+     )       
+ (
  input i_clk ,
  input i_rst , 
  
@@ -36,9 +47,11 @@ module wr_rd_data_fsm(
  
  output o_wr_req  , 
  output o_rd_req  , 
+ // data to be written to SDRAM through sdram controller fsm 
  output [`DQ_WIDTH-1:0] wr_data , 
- 
- output [`RAM_ADDR_W-1:0] wr_burst_addr 
+ // address to be provided to sdram controller fsm 
+ output [`APP_ADDR_WIDTH-1:0] wr_burst_addr ,
+ output [`APP_ADDR_WIDTH-1:0] rd_burst_addr  
  
     );
 
@@ -50,19 +63,21 @@ reg rd_req  = 0;
 reg wr_req  = 0;
 
 // state register 
-reg [2:0] p_state = 0;
+reg [3:0] p_state = 0;
 
 /////////////////////////////////////////////
 // fsm states
 ////////////////////////////////////////////
 
-parameter WAIT_DONE          = 0 ;
-parameter WAIT_WR_BURST_REQ  = 1 ;
-parameter WAIT_WR_DATA_BURST = 2 ;
-parameter IDLE_WAIT          = 3 ;
-parameter WAIT_PRECHRAGE     = 4 ;
-parameter RD_DATA            = 5 ;
-parameter DONE               = 6 ;
+localparam  WAIT_DONE                 = 0 ;
+localparam  WAIT_WR_BURST_SINGLE_REQ  = 1 ;
+localparam  WAIT_WR_BURST_REQ         = 2 ;
+localparam  WAIT_WR_DATA_SINGLE_BURST = 3 ;
+localparam  WAIT_WR_DATA_BURST        = 4 ;
+localparam  IDLE_WAIT                 = 5 ;
+localparam  WAIT_PRECHRAGE            = 6 ;
+localparam  RD_DATA                   = 7 ;
+localparam  INCR_ROM_ADDR             = 8 ;
 
 ////////////////////////////////////////////
 ///////////////////////////////////////////
@@ -70,12 +85,28 @@ parameter DONE               = 6 ;
 // data to be written into sdram memory
 reg [`DQ_WIDTH-1:0] data_write = 0;
 
-reg [`RAM_ADDR_W -1 :0] col_sdram_addr = 0; 
+reg [`APP_ADDR_WIDTH -1 :0] wr_sdram_addr = 0; 
+reg [`APP_ADDR_WIDTH -1 :0] rd_sdram_addr = 0; 
 
-assign wr_burst_addr  = col_sdram_addr ;
 
+// reg - check the column address boundary - 512
+// increment counter has to be selected based upon burst type
+// for burst len = 2 , +2
+// for burst len = 4 , +4 
+// for burst len = 8 , +8
+// for burst len = 1 , +1 (single location access)
+reg [9:0] addr_counter = 0;
+
+
+
+// assign write and read addresses
+assign wr_burst_addr  = wr_sdram_addr ;
+assign rd_burst_addr  = rd_sdram_addr ;
+
+// assign the data 
 assign  wr_data  = data_write ;
 
+// assign the write and read requests
 assign o_wr_req  = wr_req ;
 assign o_rd_req  = rd_req ;
 
@@ -87,79 +118,132 @@ assign o_rd_req  = rd_req ;
 
 always @(posedge i_clk) begin
   if (i_rst == 1'b1) begin
-     p_state = 0;
-     rd_req  = 0;
-     wr_req  = 0;
-    // burst_cnt  = 0;
-     data_write = 0;
+     p_state       <= 0;
+     rd_req        <= 0;
+     wr_req        <= 0;
+     wr_sdram_addr <= 0;
+     rd_sdram_addr <= 0;
+     data_write    <= 0;
+     addr_counter  <= 0;
   end 
   else
     begin
               case (p_state)
         
-      WAIT_DONE : begin
-                       if (i_self_refresh_done) begin
-                         p_state <= WAIT_WR_BURST_REQ ;
-                         wr_req     <= 1'b1;
-                       end 
-                       else                    
-                         p_state <= WAIT_DONE ;
-                  end 
-      
-      
-      
-      WAIT_WR_BURST_REQ : begin
-                             wr_req <= 1'b0;
-                            if (wr_burst_data_req_0)
-                              begin
-                               data_write <= data_write + 16'b10 ;
-                               p_state    <= WAIT_WR_DATA_BURST ;
-                           end 
-                           else
-                               p_state    <= WAIT_WR_BURST_REQ ;                             
-                         end 
-                        
-      WAIT_WR_DATA_BURST : begin
-                                if (wr_burst_finish) begin
-                                  data_write <= 0;
-                                  p_state <= IDLE_WAIT ;
-                               end 
-                               else
-                                 begin
-                                   data_write <= data_write + 16'b10 ;
-                                   p_state    <= WAIT_WR_DATA_BURST ;
-                                  end 
-                              end 
-
-                                         
-                        
-      IDLE_WAIT :  begin
-                       if(i_wr_done)begin
-                           p_state <= WAIT_PRECHRAGE ;
-                         end 
-                       else
-                          p_state <= IDLE_WAIT ;
-                      end  
-         
-       WAIT_PRECHRAGE : begin
-                          if (precharge_done) begin
-                              rd_req <= 1'b1 ;
-                              p_state <= RD_DATA ;
+         WAIT_DONE : begin
+                          if (i_self_refresh_done) begin
+                                   wr_req <= 1'b1;
+                                case (BURST_ACCESS_TYPE)
+                                2'b00 : p_state <= WAIT_WR_BURST_REQ ;
+                                2'b01 : p_state <= WAIT_WR_BURST_SINGLE_REQ ;
+                               // 2'b10 : p_state <=
+                                default : p_state <= WAIT_DONE ;
+                               endcase
                           end 
-                          else
-                              p_state <= WAIT_PRECHRAGE ;
-                         end                     
-      RD_DATA : begin
-                          if (i_rd_done)begin
-                              rd_req <= 1'b0 ;
-                              p_state <= DONE ;
-                          end 
-                          else
-                             p_state  <= RD_DATA ;
+                          else                    
+                            p_state    <= WAIT_DONE        ;
                      end 
+ 
+        WAIT_WR_BURST_SINGLE_REQ : begin
+                                       wr_req <= 1'b0;
+                                    if (wr_burst_data_req_0)begin
+                                      data_write <= data_write + 16'b10 ;
+                                      p_state    <= WAIT_WR_DATA_SINGLE_BURST ;
+                                    end 
+                                   else
+                                     p_state     <= WAIT_WR_BURST_SINGLE_REQ ; 
+                                  end 
+         
+         WAIT_WR_BURST_REQ : begin
+                                  wr_req     <= 1'b0                ;
+                               if (wr_burst_data_req_0)
+                                 begin
+                                  data_write <= data_write + 16'b10 ;
+                                  p_state    <= WAIT_WR_DATA_BURST  ;
+                              end 
+                              else
+                                  p_state    <= WAIT_WR_BURST_REQ   ;                             
+                             end 
+        
+         WAIT_WR_DATA_SINGLE_BURST : begin
+                                       data_write   <= data_write            ;
+                                   if (wr_burst_finish && BURST_ACCESS_TYPE) begin
+                                      wr_sdram_addr <=  wr_sdram_addr + 1'b1 ;
+                                      p_state       <= IDLE_WAIT             ;
+                                   end 
+                               end  
+                        
+         WAIT_WR_DATA_BURST : begin
+         
+                                   if (wr_burst_finish) begin
+                                               data_write     <= 0                       ;
+                                               p_state        <= IDLE_WAIT               ;                                   
+                                     case (BURST_LEN)
+                                       2'b01 : wr_sdram_addr  <= wr_sdram_addr + 10'b010  ;  // 2
+                                       2'b10 : wr_sdram_addr  <= wr_sdram_addr + 10'b100  ;  // 4
+                                       2'b11 : wr_sdram_addr  <= wr_sdram_addr + 10'b1000 ;  // 8
+                                     default : wr_sdram_addr  <= 0                       ;
+                                      endcase                                
+                                  end 
+                                  else
+                                    begin
+                                      data_write <= data_write + 16'b10 ;
+                                      p_state    <= WAIT_WR_DATA_BURST ;
+                                     end 
+                                 end 
+                           
+         IDLE_WAIT :      begin
+                                wr_sdram_addr <= wr_sdram_addr ;
+                                    if(i_wr_done)begin
+                                     p_state <= WAIT_PRECHRAGE ;
+                                   end 
+                                 else
+                                    p_state <= IDLE_WAIT ;
+                            end  
+            
+          WAIT_PRECHRAGE : begin
+                             
+                             if (precharge_done) begin
+                                 rd_req <= 1'b1 ;
+                                 p_state <= RD_DATA ;
+                             end 
+                             else
+                                 p_state <= WAIT_PRECHRAGE ;
+                            end 
+                                                
+          RD_DATA : begin
+                             if (i_rd_done)begin                                    
+                                    rd_req <= 1'b0 ;
+                                    
+                                    case (BURST_LEN)
+                                      2'b00   : addr_counter  <= addr_counter + 10'b001  ;  // 1
+                                      2'b01   : addr_counter  <= addr_counter + 10'b010  ;  // 2
+                                      2'b10   : addr_counter  <= addr_counter + 10'b100  ;  // 4
+                                      2'b11   : addr_counter  <= addr_counter + 10'b1000 ; // 8
+                                      default : addr_counter  <= 0                       ;
+                                    endcase
+                                  
+                                   case (BURST_LEN)
+                                       2'b00 : rd_sdram_addr  <= rd_sdram_addr + 10'b001  ;  // 1
+                                       2'b01 : rd_sdram_addr  <= rd_sdram_addr + 10'b010  ;  // 2
+                                       2'b10 : rd_sdram_addr  <= rd_sdram_addr + 10'b100  ;  // 4
+                                       2'b11 : rd_sdram_addr  <= rd_sdram_addr + 10'b1000 ;  // 8
+                                     default : rd_sdram_addr  <= 0                       ;
+                                      endcase    
+                                  
+                                 if ( addr_counter == 10'd512)    // if column address has reached a 0-511 (512) locations , then increment the row address
+                                       p_state <= INCR_ROM_ADDR ;
+                                    else
+                                       p_state <= WAIT_DONE ;
+                             end 
+                                else
+                                     p_state  <= RD_DATA ;
+                           end
+                       
+         INCR_ROM_ADDR : p_state <= INCR_ROM_ADDR ;
+        
            
-        DONE : p_state <= DONE ;
-       default : p_state <= WAIT_DONE ;
+        default : p_state <= WAIT_DONE ;
        endcase
        end 
       end 
