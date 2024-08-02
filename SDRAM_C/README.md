@@ -11,7 +11,7 @@
 ## Simulation Details
 
 
-   - `Burst - 8 - on incrementing addresses`
+   - `Burst - 8 - on incrementing column addresses`
 
   ![SIM_BURST_8](sim_img/sim_burst_8_continuous.jpg)  
 
