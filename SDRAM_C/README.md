@@ -18,7 +18,7 @@
 
 ## Implementation Details
 
-  - Below are the implemented design outputs from/to `FPGA` to `SDRAM`in `ILA` -: 
+  - Below are the implemented design outputs -: `FPGA` to `SDRAM` & `vice-versa` in `ILA` -: 
 
   - Single Mode Acess
   
