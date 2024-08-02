@@ -1,4 +1,4 @@
-## SDRAM Controller
+## SDRAM Controller : Implementation for Writing and Reading Data to/from SDRAM in FPGA
 
  SDRAM -: `MT48LC16M16A2 – 4 Meg x 16 x 4 banks`
 
