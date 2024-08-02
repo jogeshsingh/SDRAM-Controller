@@ -13,7 +13,7 @@
 
    - `Burst - 8 - on incrementing addresses`
 
-    ![SIM_BURST_8](sim_img/sim_burst_8_continuous.jpg)  
+  ![SIM_BURST_8](sim_img/sim_burst_8_continuous.jpg)  
 
 
 ## Implementation Details
