@@ -19,7 +19,6 @@
   
    ![W_1](sim_img/burst_8_cnt_1.jpg)
    
-  `Closer look at continuous read from different locations by writing the same data pattern`
   
   `Remember` -: Read data is converted into decimal as could be seen on `sdr_dq_in`
 
@@ -31,6 +30,9 @@
     providing the `starting address` through `column address` for burst mode.
 
     `for more info` -: check the data sheet in top `README file`
+
+`Let's take a Closer look at continuous read from different locations by writing the different data pattern`
+  
 
   **First - burst of 8 bit - data being written**
 
