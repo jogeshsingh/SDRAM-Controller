@@ -74,6 +74,10 @@
      
      - `parameter rd_burst_len` 
 
+     - `parameter BURST_OR_SINGLE_ACCESS_A9 = 1'b0' - should be 0 for burst mode
+
+     - `parameter BURST_ACCESS_TYPE = 2'b00` - should be 2'b00 for burst mode
+
  - `Leaving the above exercise to fellow learners`  
 
 
