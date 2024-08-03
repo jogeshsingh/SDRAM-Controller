@@ -78,7 +78,7 @@
 
      - `parameter BURST_ACCESS_TYPE = 2'b00` - should be 2'b00 for burst mode
 
- - `Leaving the above exercise to fellow learners`  
+ - `Leaving the above exercise for burst 2 & 4 for fellow learners`  
 
 
 ## Implementation Details - Single Mode access - burst - 1 
