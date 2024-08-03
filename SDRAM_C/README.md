@@ -36,9 +36,9 @@
  - `for more info` -: check the data sheet in top `README file`
 
 
- - `Remember` -: In the **following** transaction through `ILA` , `sdr_dq_in` and `sdram_dq_obuf` are internal
+ - `Remember` -: In the **following** transaction through `ILA` , `sdr_dq_in` and `sdram_dq_obuf` are internal to
       
-      `sdram` controller as , the sdram data is bidirectional , so `in` and `out` transactions are shown
+      `sdram controller` as , the sdram data is bidirectional , so `in` and `out` transactions are shown
 
       separately.
  
