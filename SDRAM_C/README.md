@@ -23,8 +23,11 @@
    
   
 
-  - `Address` [8:3] truncates to select the 4th[3] bit from `1000` , as you can see in the second transaction(second burst)
-    the address got `1` and so on it changes to `2` , `3` ... in consecutive transactions. 
+  - `Sdram_Address_r` [8:3] truncates to select the 4th[3] bit from `1000` in sdram controller logic , as you can see in 
+  
+    the second transaction(second burst) the address got `1` and so on it changes to `2` , `3` ... in consecutive 
+  
+    transactions. 
 
  - `Note` - that `1fff` in sdram_addr means every bit is high in address , that is considered like `don't care` when after 
 
