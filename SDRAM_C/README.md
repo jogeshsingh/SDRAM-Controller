@@ -15,6 +15,8 @@
 
   ![SIM_BURST_8](sim_img/sim_burst_8_continuous.jpg)  
 
+## Implementation Details  - Burst Mode - 8 
+
    - `IN ILA` - `Burst - 8 - on incrementing column addresses`
   
    ![W_1](sim_img/burst_8_cnt_1.jpg)
@@ -72,11 +74,11 @@
  - `Leaving the above exercise to fellow learners`  
 
 
-## Implementation Details
+## Implementation Details - Single Mode access - burst - 1 
 
   - Below are the implemented design outputs -: `FPGA` to `SDRAM` & `SDRAM to FPGA` in `ILA` -: 
 
-  - Single Mode Acess
+  - Single Mode Access
   
     - This section describes the timing for `reading` and `writing` from/to single array location in `SDRAM`
 
