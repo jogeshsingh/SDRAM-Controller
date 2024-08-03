@@ -27,7 +27,7 @@ module top_sdram_tb();
    // like for BL = 2 , = 2 
    // for BL = 010 = 4
    // for BL = 011 = 8
-  parameter BL                =  3'b011   ;
+  parameter BL                =  3'b010   ;
    
   //    BURST_ACCESS_TYPE = 2'b00 , -> burst type ->  2, 4, 8 
   //    BURST_ACCESS_TYPE = 2'b01 , -> burst type -> 1 or single access location
@@ -40,9 +40,14 @@ module top_sdram_tb();
    // 011 = 8 burst of data
    // 100 = full page 
    
-  parameter wr_burst_len      = 8         ; 
-  parameter rd_burst_len      = 8         ;   
+  parameter wr_burst_len      = 4         ; 
+  parameter rd_burst_len      = 4         ;   
   
+    // for load mode register - 
+   // Operation mode setting (set here to A9(BURST_OR_SINGLE_ACCESS_A9)=0, ie burst read / burst write)  
+   // (set A9(BURST_OR_SINGLE_ACCESS_A9) = 1, for single location access)
+   parameter BURST_OR_SINGLE_ACCESS_A9 =1'b0 ;
+   
      // Parameters
   parameter T_RP = 4;
   parameter T_RC = 6;
@@ -100,6 +105,7 @@ module top_sdram_tb();
    //    BURST_ACCESS_TYPE = 2'b10 , -> burts type -> continuous burst  
    .BURST_ACCESS_TYPE (BURST_ACCESS_TYPE) ,
    
+   .BURST_OR_SINGLE_ACCESS_A9(BURST_OR_SINGLE_ACCESS_A9) , 
    // BURST LENGTH , Load mode register parameters
    // 001 = 2 burst of data
    // 010 = 4 burst of data 
