@@ -21,18 +21,18 @@
 
 `define APP_ADDR_WIDTH 24
 //`define BURST_LEN 2
-`define DQ_WIDTH 16
+ 
 
 module wr_rd_data_fsm
 # (parameter BURST_ACCESS_TYPE = 2'b00, 
           // if BURST_ACCESS_TYPE = 2'b00 , -> burst type 
           //    BURST_ACCESS_TYPE = 2'b01 , -> single access location
           //    BURST_ACCESS_TYPE = 2'b10 , -> continuous burst  
-   parameter BURST_LEN = 2'b00 
-           // BURST_LEN = 2'b00 -> 1 (single access location) 
-           // BURST_LEN = 2'b01 -> 2 (burst of length - 2 )
-           // BURST_LEN = 2'b10 -> 4 (burst of length - 4 )
-           // BURST_LEN = 2'b11 -> 8 (burst of length - 8 )
+   parameter BURST_LEN = 3'b000 
+           // BURST_LEN = 3'b000 -> 1 (single access location) 
+           // BURST_LEN = 3'b001 -> 2 (burst of length - 2 )
+           // BURST_LEN = 3'b010 -> 4 (burst of length - 4 )
+           // BURST_LEN = 3'b011 -> 8 (burst of length - 8 )
      )       
  (
  input i_clk ,
@@ -48,7 +48,7 @@ module wr_rd_data_fsm
  output o_wr_req  , 
  output o_rd_req  , 
  // data to be written to SDRAM through sdram controller fsm 
- output [`DQ_WIDTH-1:0] wr_data , 
+ output [15:0] wr_data , 
  // address to be provided to sdram controller fsm 
  output [`APP_ADDR_WIDTH-1:0] wr_burst_addr ,
  output [`APP_ADDR_WIDTH-1:0] rd_burst_addr  
@@ -83,7 +83,7 @@ localparam  INCR_ROM_ADDR             = 8 ;
 ///////////////////////////////////////////
 
 // data to be written into sdram memory
-reg [`DQ_WIDTH-1:0] data_write = 0;
+reg [15:0] data_write = 0;
 
 reg [`APP_ADDR_WIDTH -1 :0] wr_sdram_addr = 0; 
 reg [`APP_ADDR_WIDTH -1 :0] rd_sdram_addr = 0; 
@@ -176,12 +176,12 @@ always @(posedge i_clk) begin
          WAIT_WR_DATA_BURST : begin
          
                                    if (wr_burst_finish) begin
-                                               data_write     <= 0                       ;
+                                               data_write     <= data_write              ;
                                                p_state        <= IDLE_WAIT               ;                                   
                                      case (BURST_LEN)
-                                       2'b01 : wr_sdram_addr  <= wr_sdram_addr + 10'b010  ;  // 2
-                                       2'b10 : wr_sdram_addr  <= wr_sdram_addr + 10'b100  ;  // 4
-                                       2'b11 : wr_sdram_addr  <= wr_sdram_addr + 10'b1000 ;  // 8
+                                       3'b001 : wr_sdram_addr  <= wr_sdram_addr + 24'b010  ;  // 2
+                                       3'b010 : wr_sdram_addr  <= wr_sdram_addr + 24'b100  ;  // 4
+                                       3'b011 : wr_sdram_addr  <= wr_sdram_addr + 24'b1000 ;  // 8
                                      default : wr_sdram_addr  <= 0                       ;
                                       endcase                                
                                   end 
@@ -216,18 +216,18 @@ always @(posedge i_clk) begin
                                     rd_req <= 1'b0 ;
                                     
                                     case (BURST_LEN)
-                                      2'b00   : addr_counter  <= addr_counter + 10'b001  ;  // 1
-                                      2'b01   : addr_counter  <= addr_counter + 10'b010  ;  // 2
-                                      2'b10   : addr_counter  <= addr_counter + 10'b100  ;  // 4
-                                      2'b11   : addr_counter  <= addr_counter + 10'b1000 ; // 8
+                                      3'b000   : addr_counter  <= addr_counter + 10'b001  ;  // 1
+                                      3'b001   : addr_counter  <= addr_counter + 10'b010  ;  // 2
+                                      3'b010   : addr_counter  <= addr_counter + 10'b100  ;  // 4
+                                      3'b011   : addr_counter  <= addr_counter + 10'b1000 ; // 8
                                       default : addr_counter  <= 0                       ;
                                     endcase
                                   
                                    case (BURST_LEN)
-                                       2'b00 : rd_sdram_addr  <= rd_sdram_addr + 10'b001  ;  // 1
-                                       2'b01 : rd_sdram_addr  <= rd_sdram_addr + 10'b010  ;  // 2
-                                       2'b10 : rd_sdram_addr  <= rd_sdram_addr + 10'b100  ;  // 4
-                                       2'b11 : rd_sdram_addr  <= rd_sdram_addr + 10'b1000 ;  // 8
+                                       3'b000 : rd_sdram_addr  <= rd_sdram_addr + 24'b001  ;  // 1
+                                       3'b001 : rd_sdram_addr  <= rd_sdram_addr + 24'b010  ;  // 2
+                                       3'b010 : rd_sdram_addr  <= rd_sdram_addr + 24'b100  ;  // 4
+                                       3'b011 : rd_sdram_addr  <= rd_sdram_addr + 24'b1000 ;  // 8
                                      default : rd_sdram_addr  <= 0                       ;
                                       endcase    
                                   

@@ -435,9 +435,9 @@ begin
 				     case (BL)
 				3'b000 : sdram_addr_r <= {4'b0000,sys_addr[8:0]};  // A0-A8 (x16) select the unique column to be accessed for single access (a.k.a BL = 1)
 			   3'b001 : sdram_addr_r <= {4'b0000,sys_addr[8:1]};  // A1-A8 (x16) select the burst length BL = 2 
-				3'b001 : sdram_addr_r <= {4'b0000,sys_addr[8:2]};  // A2-A8 (x16) select the burst length BL = 4 
-			   3'b001 : sdram_addr_r <= {4'b0000,sys_addr[8:3]};  // A3-A8 (x16) select the burst length BL = 8 
-			   3'b001 : sdram_addr_r <= {4'b0000,sys_addr[8:0]};  // A0-A8 (x16) select the burst length BL = Continuous page
+				3'b010 : sdram_addr_r <= {4'b0000,sys_addr[8:2]};  // A2-A8 (x16) select the burst length BL = 4 
+			   3'b011 : sdram_addr_r <= {4'b0000,sys_addr[8:3]};  // A3-A8 (x16) select the burst length BL = 8 
+			   3'b100 : sdram_addr_r <= {4'b0000,sys_addr[8:0]};  // A0-A8 (x16) select the burst length BL = Continuous page
 			   default : sdram_addr_r <= {SDR_ROW_WIDTH{1'b1}};   // default case 
 			   endcase 
 			end
@@ -458,9 +458,9 @@ begin
 				case (BL)
 				3'b000 : sdram_addr_r <= {4'b0000,sys_addr[8:0]};  // A0-A8 (x16) select the unique column to be accessed for single access (a.k.a BL = 1)
 			   3'b001 : sdram_addr_r <= {4'b0000,sys_addr[8:1]};  // A1-A8 (x16) select the burst length BL = 2 
-				3'b001 : sdram_addr_r <= {4'b0000,sys_addr[8:2]};  // A2-A8 (x16) select the burst length BL = 4 
-			   3'b001 : sdram_addr_r <= {4'b0000,sys_addr[8:3]};  // A3-A8 (x16) select the burst length BL = 8 
-			   3'b001 : sdram_addr_r <= {4'b0000,sys_addr[8:0]};  // A0-A8 (x16) select the burst length BL = Continuous page
+				3'b010 : sdram_addr_r <= {4'b0000,sys_addr[8:2]};  // A2-A8 (x16) select the burst length BL = 4 
+			   3'b011 : sdram_addr_r <= {4'b0000,sys_addr[8:3]};  // A3-A8 (x16) select the burst length BL = 8 
+			   3'b100 : sdram_addr_r <= {4'b0000,sys_addr[8:0]};  // A0-A8 (x16) select the burst length BL = Continuous page
 			   default : sdram_addr_r <= {SDR_ROW_WIDTH{1'b1}};   // default case 
 			   endcase 
 			end

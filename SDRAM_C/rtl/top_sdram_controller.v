@@ -18,6 +18,10 @@ module top_sdram_controller
    //    BURST_ACCESS_TYPE = 2'b10 , -> burts type -> continuous burst  
    parameter BURST_ACCESS_TYPE = 2'b00 ,
    
+   // for load mode register - 
+   // Operation mode setting (set here to A9(BURST_OR_SINGLE_ACCESS_A9)=0, ie burst read / burst write)  
+   // (set A9(BURST_OR_SINGLE_ACCESS_A9) = 1, for single location access)
+   parameter BURST_OR_SINGLE_ACCESS_A9 =1'b0 , 
    // BURST LENGTH , Load mode register parameters
    // for BL = 001 , {wr_burst_len,rd_burst_len} => 2 burst of data
    // for BL = 010 , {wr_burst_len,rd_burst_len} => 4 burst of data 
@@ -76,13 +80,13 @@ module top_sdram_controller
       wire wr_burst_data_req                  ;
       wire wr_burst_finish                    ;
       
-      
+      (*KEEP = "true"*)
       wire [SDR_DQ_WIDTH-1:0]    wr_data       ;
       wire [APP_ADDR_WIDTH-1:0 ] wr_burst_addr ;
       wire [APP_ADDR_WIDTH-1:0 ] rd_burst_addr ;
       wire wr_burst_req                        ;
     
-    
+      
     
      
      /////////////////////////////////////////////////
@@ -146,7 +150,9 @@ module top_sdram_controller
 	  .SDR_DQ_WIDTH            (SDR_DQ_WIDTH        ) ,   
 	  .SDR_DQM_WIDTH           (SDR_DQM_WIDTH       ) ,   
 	  .APP_ADDR_WIDTH          (APP_ADDR_WIDTH      ) ,   
-	  .APP_BURST_WIDTH         (APP_BURST_WIDTH     )    
+	  .APP_BURST_WIDTH         (APP_BURST_WIDTH     ) , 
+	  .BURST_OR_SINGLE_ACCESS_A9 (BURST_OR_SINGLE_ACCESS_A9)       // A9 = 0 , for read/write access , A9 = 1 , for single location access            
+    
   )
   uo_sdram_controller(
 	          .clk  (clk_out1),
