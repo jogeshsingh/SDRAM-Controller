@@ -16,21 +16,39 @@
   ![SIM_BURST_8](sim_img/sim_burst_8_continuous.jpg)  
 
    - `IN ILA` - `Burst - 8 - on incrementing column addresses`
-
-
+  
+   ![W_1](sim_img/burst_8_cnt_1.jpg)
    
   `Closer look at continuous read from different locations by writing the same data pattern`
   
   `Remember` -: Read data is converted into decimal as could be seen on `sdr_dq_in`
 
-  **Check the time stamp - 2086**
+   `Address` [8:3] truncates to select the 4th[3] bit from `1000` , as you can see in the second transaction(second burst)
+    the address got `1` and so on it changes to `2` , `3` ... in consecutive transactions. 
 
+    `Note` - that `1fff` means every bit is high in address , that is considered like `don't care` when after 
+
+    providing the `starting address` through `column address` for burst mode.
+
+    `for more info` -: check the data sheet in top `README file`
+
+  **First - burst of 8 bit - data being written**
+
+  ![W_2](sim_img/burst_8_cnt_wr.jpg)
+
+  **First - burst of 8 bit - data being read**
+
+  ![W_3](sim_img/burst_8_cnt_rd.jpg)
+
+  **Second - burst of 8 bit - data being written**
+
+  ![W_2](sim_img/burst_8_cnt_wr_2.jpg)
+
+  **Second - burst of 8 bit - data being read**
+
+  ![W_3](sim_img/burst_8_cnt_rd_2.jpg)
    
-
-  **Check the time stamp - 2334 , same data read from different location**
-
-  
-
+ 
  
   **Helpful note** 
      
@@ -68,49 +86,7 @@
 
 
 
-  - Burst Mode access
-
-    - This section describes the timing for `reading` and `writing` from/to multiple array location in `SDRAM` using `burst mode`
-
-       **NOTE**
-
-      - `Write burst`  is on `sdr_dq_out` 
-       
-      - `Read burst` is  on `sdr_dq_in`
-      
-    - **BURST of 2 data (Write and read Access)  - one burst**
-
-       `Write burst`
-
-       ![burst_2_w](sim_img/burst_2.jpg)
-     
-      `Read burst`
-
-      ![burst_2_r](sim_img/burst_2_read.jpg)
-   
-    
-     - **BURST of 4 data (Write and read Access)  - one burst**
- 
-       `Write burst`
-
-       ![burst_2_w](sim_img/burst_4_w.jpg)
-     
-       `Read burst`
-
-       ![burst_2_r](sim_img/burst_4_rd.jpg)
-
-
-     - **BURST of 8 data (Write and read Access)  - one burst**
-
-       `Write burst`
-
-       ![burst_2_w](sim_img/burst_8_w.jpg)
-     
-       `Read burst`
-
-       ![burst_2_r](sim_img/burst_8_rd.jpg)
-   
-
+  
        
 
  
