@@ -20,18 +20,17 @@
    ![W_1](sim_img/burst_8_cnt_1.jpg)
    
   
-  `Remember` -: Read data is converted into decimal as could be seen on `sdr_dq_in`
 
-   `Address` [8:3] truncates to select the 4th[3] bit from `1000` , as you can see in the second transaction(second burst)
+  - `Address` [8:3] truncates to select the 4th[3] bit from `1000` , as you can see in the second transaction(second burst)
     the address got `1` and so on it changes to `2` , `3` ... in consecutive transactions. 
 
-    `Note` - that `1fff` means every bit is high in address , that is considered like `don't care` when after 
+ - `Note` - that `1fff` means every bit is high in address , that is considered like `don't care` when after 
 
-    providing the `starting address` through `column address` for burst mode.
+   providing the `starting address` through `column address` for burst mode.
 
-    `for more info` -: check the data sheet in top `README file`
+ - `for more info` -: check the data sheet in top `README file`
 
-`Let's take a Closer look at continuous read from different locations by writing the different data pattern`
+- `Let's take a Closer look at continuous read from different locations by writing the different data pattern`
   
 
   **First - burst of 8 bit - data being written**
