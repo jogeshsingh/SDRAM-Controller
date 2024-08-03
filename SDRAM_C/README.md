@@ -24,28 +24,35 @@
   - `Address` [8:3] truncates to select the 4th[3] bit from `1000` , as you can see in the second transaction(second burst)
     the address got `1` and so on it changes to `2` , `3` ... in consecutive transactions. 
 
- - `Note` - that `1fff` means every bit is high in address , that is considered like `don't care` when after 
+ - `Note` - that `1fff` in sdram_addr means every bit is high in address , that is considered like `don't care` when after 
 
-   providing the `starting address` through `column address` for burst mode.
+   providing the `starting address` through `column address` for burst mode .
 
  - `for more info` -: check the data sheet in top `README file`
 
+
+ - `Remember` -: In the **following** transaction through `ILA` , `sdr_dq_in` and `sdram_dq_obuf` are internal
+      
+      `sdram` controller as , the sdram data is bidirectional , so `in` and `out` transactions are shown
+
+      separately.
+ 
 - `Let's take a Closer look at continuous read from different locations by writing the different data pattern`
   
 
-  **First - burst of 8 bit - data being written**
+  **First - burst of 8 bit - data being written through sdram_dq_OBUF**
 
   ![W_2](sim_img/burst_8_cnt_wr.jpg)
 
-  **First - burst of 8 bit - data being read**
+  **First - burst of 8 bit - data being read on sdr_dq_in**
 
   ![W_3](sim_img/burst_8_cnt_rd.jpg)
 
-  **Second - burst of 8 bit - data being written**
+  **Second - burst of 8 bit - data being written through sdram_dq_OBUF**
 
   ![W_2](sim_img/burst_8_cnt_wr_2.jpg)
 
-  **Second - burst of 8 bit - data being read**
+  **Second - burst of 8 bit - data being read on sdr_dq_in**
 
   ![W_3](sim_img/burst_8_cnt_rd_2.jpg)
    
