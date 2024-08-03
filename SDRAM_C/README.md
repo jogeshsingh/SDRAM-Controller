@@ -20,15 +20,17 @@
 
   ![B_8_R_1](sim_img/burst_8_continuous.jpg)
 
-  `Closer look at continuous read from different locations`
+  `Closer look at continuous read from different locations by writing the same data pattern`
+  
+  `Remember` -: Read data is converted into decimal as could be seen on `sdr_dq_in`
 
   **Check the time stamp - 2086**
 
   ![B_8_R_11](sim_img/burst_8_continuous_rd_closer_1.jpg)
 
-  **Check the time stamp - 2334**
+  **Check the time stamp - 2334 , same data read from different location**
 
-    ![B_8_R_11](sim_img/burst_8_continuous_rd_closer_2.jpg)
+  ![B_8_R_11](sim_img/burst_8_continuous_rd_closer_2.jpg)
 
  
   **Helpful note** 
