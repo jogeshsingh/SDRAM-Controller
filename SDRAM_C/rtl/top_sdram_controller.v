@@ -6,29 +6,30 @@
 
 module top_sdram_controller
 #(
-   /////////////////////////////////
-   ///////////////////////////////////
-   // write burst length in count
-   // like for BL = 2 , = 2 
-   // for BL = 010 = 4
-   // for BL = 011 = 8
-   parameter BL                      =  3'b011  , 
+   ///////////////////////////////////////////
+   //////////////////////////////////////////
+   // write and read burst length in count              
+   // BL          = 000 ,     = 1 burst of data
+   // for BL      = 001 ,     = 2 burst of data
+   // for BL      = 010 ,     = 4 burst of data
+   // for BL      = 011 ,     = 8 burst of data
+   parameter BL                      =  3'b000  , 
    //    BURST_ACCESS_TYPE = 2'b00 , -> burst type ->  2, 4, 8 
    //    BURST_ACCESS_TYPE = 2'b01 , -> burst type -> 1 or single access location
    //    BURST_ACCESS_TYPE = 2'b10 , -> burts type -> continuous burst  
-   parameter BURST_ACCESS_TYPE = 2'b00 ,
+   parameter BURST_ACCESS_TYPE = 2'b01 ,
    
    // for load mode register - 
    // Operation mode setting (set here to A9(BURST_OR_SINGLE_ACCESS_A9)=0, ie burst read / burst write)  
    // (set A9(BURST_OR_SINGLE_ACCESS_A9) = 1, for single location access)
-   parameter BURST_OR_SINGLE_ACCESS_A9 =1'b0 , 
+   parameter BURST_OR_SINGLE_ACCESS_A9 =1'b1 , 
    // BURST LENGTH , Load mode register parameters
    // for BL = 001 , {wr_burst_len,rd_burst_len} => 2 burst of data
    // for BL = 010 , {wr_burst_len,rd_burst_len} => 4 burst of data 
    // for BL = 011 , {wr_burst_len,rd_burst_len} => 8 burst of data
    // 100 = full page 
-   parameter wr_burst_len  = 8 , 
-   parameter rd_burst_len  = 8 , 
+   parameter wr_burst_len  = 1 , 
+   parameter rd_burst_len  = 1 , 
      
    // Timing Parameters
 	parameter T_RP                    =  4,     // precharge command period

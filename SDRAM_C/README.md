@@ -86,18 +86,56 @@
   - Below are the implemented design outputs -: `FPGA` to `SDRAM` & `SDRAM to FPGA` in `ILA` -: 
 
   - Single Mode Access
-  
+
+    **Simulation view**
+
+    - `Wr_rd_data_fsm sim`
+
+     ![wr_sim_single](sim_img/wr_fsm_single_access.jpg)
+
+
+    - `sdram_controller sim for single access`
+
+     ![sdram_single](sim_img/sdram_core_single_access_tb.jpg)  
+
     - This section describes the timing for `reading` and `writing` from/to single array location in `SDRAM`
 
+  
+    - `ILA view of reading and writing from/to sdram`
+
+    ![ILA_S](sim_img/single_burst_ila.jpg)
 
 
     - **Single Write Access**
 
+    - **First address**
 
+     ![ILA_S_1](sim_img/single_burst_ila_w_1.jpg)
+
+    - **Second address**
+
+     ![ILA_S_2](sim_img/single_burst_ila_w_2.jpg) 
+
+    - **Third address**
+
+     ![ILA_S_3](sim_img/single_burst_ila_w_3.jpg) 
+ 
 
 
     - **Single Read Access**
 
+    - **First address**
+
+     ![ILA_SR_1](sim_img/single_burst_ila_r_1.jpg)
+
+    - **Second address**
+
+     ![ILA_SR_2](sim_img/single_burst_ila_r_2.jpg) 
+
+    - **Third address**
+
+     ![ILA_SR_3](sim_img/single_burst_ila_r_3.jpg) 
+ 
 
 
 
