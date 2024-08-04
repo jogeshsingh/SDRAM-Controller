@@ -108,15 +108,15 @@
 
 ## Single Write Access
 
-    - **First address** - `0000`
+  - **First address** - `0000`
 
      ![ILA_S_1](sim_img/single_burst_ila_w_1.jpg)
 
-    - **Second address** - `0001`
+  - **Second address** - `0001`
 
      ![ILA_S_2](sim_img/single_burst_ila_w_2.jpg) 
 
-    - **Third address**  - `0002`
+  - **Third address**  - `0002`
 
      ![ILA_S_3](sim_img/single_burst_ila_w_3.jpg) 
  
@@ -124,15 +124,15 @@
 
 ## Single Read Access
 
-    - **First address**  - `0000`
+  - **First address**  - `0000`
 
      ![ILA_SR_1](sim_img/single_burst_ila_r_1.jpg)
 
-    - **Second address** - `0001`
+  - **Second address** - `0001`
 
      ![ILA_SR_2](sim_img/single_burst_ila_r_2.jpg) 
 
-    - **Third address**  - `0002`
+  - **Third address**  - `0002`
 
      ![ILA_SR_3](sim_img/single_burst_ila_r_3.jpg) 
  
