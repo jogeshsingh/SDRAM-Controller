@@ -106,7 +106,7 @@
     ![ILA_S](sim_img/single_burst_ila.jpg)
 
 
-    - **Single Write Access**
+## Single Write Access
 
     - **First address** - `0000`
 
@@ -122,7 +122,7 @@
  
 
 
-    - **Single Read Access**
+## Single Read Access
 
     - **First address**  - `0000`
 
