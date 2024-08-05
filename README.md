@@ -56,8 +56,10 @@
    // 100 = full page (`NOT YET IMPLEMENTED`)
    
    `parameter wr_burst_len  = 1` , 
+   
    `parameter rd_burst_len  = 1` , 
-
+  
+  ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 ## Directories
