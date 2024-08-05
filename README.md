@@ -9,9 +9,9 @@
 
 ## Directories
 
-  - There are mainly `2` directories for now -:
+  - There are mainly `3` directories for now -:
 
-  - `SDRAM_C` and `SDRAM_BURST_ACCESS`
+  - `SDRAM_C`  , `SDRAM_BURST_ACCESS` and `SDRAM_VIVADO_PROJECT`
 
   - `SDRAM_C` -: 
    
@@ -28,8 +28,11 @@
               
     - `User` may have to implement incrementing addressing logic in this `as` included in  `SDRAM_C` folder
 
+  - `SDRAM_VIVADO_PROJECT` -:
 
+   - It includes the complete `VIVADO Project` for `single burst access` and `multiple_burst_access(2 , 4, 8)`
 
+   **Note** -: *VIVADO_VERSION-: 2020.2*  
 
 
   - `SDRAM_C`
