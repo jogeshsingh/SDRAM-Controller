@@ -75,6 +75,8 @@
     - This code should be used for more accurate view of `incrementing` addresses in case of `single burst` , `multiple burst` 
       and `continuous burst`(`yet to be implemented`).
 
+    - `Use this folder` to skim thoroughly between transactions described in `README file`  
+
   - `SDRAM_BURST_ACCESS` -: 
               
     - It includes `multiple_burst_access(2 , 4, 8)` with `no`  incrementing addressing logic and it just sends 
