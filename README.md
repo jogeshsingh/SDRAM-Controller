@@ -32,7 +32,7 @@
 
    - It includes the complete `VIVADO Project` for `single burst access` and `multiple_burst_access(2 , 4, 8)`
 
-   **Note** -: *VIVADO_VERSION-: 2020.2*  
+     **Note** -: *VIVADO_VERSION-: 2020.2*  
 
 
   - Directories 
