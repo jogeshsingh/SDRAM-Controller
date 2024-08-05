@@ -39,7 +39,7 @@ module top_sdram_tb();
    // 001 = 2 burst of data
    // 010 = 4 burst of data 
    // 011 = 8 burst of data
-   // 100 = full page 
+ 
    
   parameter wr_burst_len      = 1         ; 
   parameter rd_burst_len      = 1         ;   

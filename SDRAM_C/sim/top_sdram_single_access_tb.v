@@ -36,9 +36,14 @@ module top_sdram_single_access_tb();
   parameter BURST_ACCESS_TYPE =  2'b01    ;
   
    // BURST LENGTH , Load mode register parameters
-    
-  parameter wr_burst_len      = 4         ;   // 1  for BL = 000(single access) , 2 for BL = 001 , 4 for BL = 010 , 8 for BL = 011
-  parameter rd_burst_len      = 4         ;   // 1  for BL = 000(single access) , 2 for BL = 001 , 4 for BL = 010 , 8 for BL = 011
+    // BURST LENGTH , Load mode register parameters
+   // for BL = 000 , {wr_burst_len,rd_burst_len} => 1 burst of data 
+   // for BL = 001 , {wr_burst_len,rd_burst_len} => 2 burst of data
+   // for BL = 010 , {wr_burst_len,rd_burst_len} => 4 burst of data 
+   // for BL = 011 , {wr_burst_len,rd_burst_len} => 8 burst of data
+   
+  parameter wr_burst_len      = 1         ;   // 1  for BL = 000(single access) , 2 for BL = 001 , 4 for BL = 010 , 8 for BL = 011
+  parameter rd_burst_len      = 1         ;   // 1  for BL = 000(single access) , 2 for BL = 001 , 4 for BL = 010 , 8 for BL = 011
    
   
     // for load mode register - 
