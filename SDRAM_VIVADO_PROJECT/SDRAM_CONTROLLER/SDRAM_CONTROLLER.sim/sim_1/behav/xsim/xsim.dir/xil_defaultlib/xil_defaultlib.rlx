@@ -1,0 +1,13 @@
+0.7
+2020.2
+Nov 18 2020
+09:47:47
+E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.gen/sources_1/ip/clk_wiz_0/clk_wiz_0.v,1722182608,verilog,,E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.srcs/sources_1/new/sdram_controller.v,,clk_wiz_0,,,../../../../SDRAM_CONTROLLER.gen/sources_1/ip/clk_wiz_0,,,,,
+E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_wiz.v,1722182608,verilog,,E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.gen/sources_1/ip/clk_wiz_0/clk_wiz_0.v,,clk_wiz_0_clk_wiz,,,../../../../SDRAM_CONTROLLER.gen/sources_1/ip/clk_wiz_0,,,,,
+E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.sim/sim_1/behav/xsim/glbl.v,1605673889,verilog,,,,glbl,,,,,,,,
+E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.srcs/sim_1/new/top_sdram_tb.v,1722778006,verilog,,,,top_sdram_tb,,,../../../../SDRAM_CONTROLLER.gen/sources_1/ip/clk_wiz_0,,,,,
+E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.srcs/sources_1/new/sdram_controller.v,1722670057,verilog,,E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.srcs/sources_1/new/top_sdram_controller.v,,sdram_core,,,../../../../SDRAM_CONTROLLER.gen/sources_1/ip/clk_wiz_0,,,,,
+E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.srcs/sources_1/new/top_design.v,1722011423,verilog,,E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.srcs/sources_1/new/wr_rd_data_fsm.v,,top_design,,,../../../../SDRAM_CONTROLLER.gen/sources_1/ip/clk_wiz_0,,,,,
+E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.srcs/sources_1/new/top_sdram_controller.v,1722777921,verilog,,E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.srcs/sources_1/new/wr_rd_data_fsm.v,,top_sdram_controller,,,../../../../SDRAM_CONTROLLER.gen/sources_1/ip/clk_wiz_0,,,,,
+E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.srcs/sources_1/new/wr_rd_data_fsm.v,1722674728,verilog,,E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.srcs/sim_1/new/top_sdram_tb.v,,wr_rd_data_fsm,,,../../../../SDRAM_CONTROLLER.gen/sources_1/ip/clk_wiz_0,,,,,
+E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/sdram_test.v,1721564611,verilog,,,,sdram_core_tb,,,,,,,,

@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Webtalk v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Wed Jul 31 19:06:23 2024
+# Process ID: 29844
+# Current directory: E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.sim/sim_1/behav/xsim
+# Command line: wbtcv.exe -mode batch -source E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.sim/sim_1/behav/xsim/xsim.dir/top_sdram_tb_behav/webtalk/xsim_webtalk.tcl -notrace
+# Log file: E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.sim/sim_1/behav/xsim/webtalk.log
+# Journal file: E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.sim/sim_1/behav/xsim\webtalk.jou
+#-----------------------------------------------------------
+source E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.sim/sim_1/behav/xsim/xsim.dir/top_sdram_tb_behav/webtalk/xsim_webtalk.tcl -notrace

@@ -1,0 +1,13 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.gen/sources_1/ip/clk_wiz_0/clk_wiz_0_clk_wiz.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module clk_wiz_0_clk_wiz
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.gen/sources_1/ip/clk_wiz_0/clk_wiz_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module clk_wiz_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.srcs/sources_1/new/sdram_controller.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module sdram_core
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.srcs/sources_1/new/top_sdram_controller.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module top_sdram_controller
+INFO: [VRFC 10-2458] undeclared symbol rd_burst_req, assumed default net type wire [E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.srcs/sources_1/new/top_sdram_controller.v:168]
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.srcs/sources_1/new/wr_rd_data_fsm.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module wr_rd_data_fsm
+INFO: [VRFC 10-2263] Analyzing Verilog file "E:/VIVADO_2022/ARTIX_A7_FPGA/SDRAM/SDRAM_CONTROLLER/SDRAM_CONTROLLER.srcs/sim_1/new/top_sdram_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module top_sdram_tb

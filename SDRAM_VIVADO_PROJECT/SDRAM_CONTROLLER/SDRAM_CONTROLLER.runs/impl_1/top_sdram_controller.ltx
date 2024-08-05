@@ -1,0 +1,865 @@
+{
+    "ltx_root": {
+        "version": 4,
+        "minor": 0,
+        "ltx_data": [
+            {
+                "name": "EDA_PROBESET",
+                "active": true,
+                "debug_cores": [
+                    {
+                        "type": "XSDB_V3",
+                        "name": "dbg_hub",
+                        "spec": "labtools_xsdbm_v3",
+                        "clk_input_freq_hz": "100000000"
+                    },
+                    {
+                        "type": "ILA_V3",
+                        "name": "u_ila_0",
+                        "spec": "labtools_ila_v6",
+                        "core_location": {
+                            "user_chain": 1,
+                            "slave_index": 0,
+                            "bscan_switch_index": 0
+                        },
+                        "uuid": "23e7d65a79bc59f7bc47406c1714dfae",
+                        "pins": [
+                            {
+                                "name": "probe0",
+                                "id": 0,
+                                "type": "DATA_TRIGGER",
+                                "direction": "IN",
+                                "isVector": true,
+                                "leftIndex": 0,
+                                "rightIndex": 12,
+                                "portIndex": 0,
+                                "nets": [
+                                    {
+                                        "name": "uo_sdram_controller/sdram_addr_r",
+                                        "isBus": true,
+                                        "subnets": [
+                                            {
+                                                "name": "uo_sdram_controller/sdram_addr_r[12]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdram_addr_r[11]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdram_addr_r[10]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdram_addr_r[9]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdram_addr_r[8]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdram_addr_r[7]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdram_addr_r[6]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdram_addr_r[5]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdram_addr_r[4]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdram_addr_r[3]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdram_addr_r[2]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdram_addr_r[1]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdram_addr_r[0]"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "probe1",
+                                "id": 1,
+                                "type": "DATA_TRIGGER",
+                                "direction": "IN",
+                                "isVector": true,
+                                "leftIndex": 0,
+                                "rightIndex": 1,
+                                "portIndex": 1,
+                                "nets": [
+                                    {
+                                        "name": "uo_sdram_controller/sdram_ba_r",
+                                        "isBus": true,
+                                        "subnets": [
+                                            {
+                                                "name": "uo_sdram_controller/sdram_ba_r[1]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdram_ba_r[0]"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "probe2",
+                                "id": 2,
+                                "type": "DATA_TRIGGER",
+                                "direction": "IN",
+                                "isVector": true,
+                                "leftIndex": 0,
+                                "rightIndex": 15,
+                                "portIndex": 2,
+                                "nets": [
+                                    {
+                                        "name": "sdram_dq_OBUF",
+                                        "isBus": true,
+                                        "subnets": [
+                                            {
+                                                "name": "sdram_dq_OBUF[15]"
+                                            },
+                                            {
+                                                "name": "sdram_dq_OBUF[14]"
+                                            },
+                                            {
+                                                "name": "sdram_dq_OBUF[13]"
+                                            },
+                                            {
+                                                "name": "sdram_dq_OBUF[12]"
+                                            },
+                                            {
+                                                "name": "sdram_dq_OBUF[11]"
+                                            },
+                                            {
+                                                "name": "sdram_dq_OBUF[10]"
+                                            },
+                                            {
+                                                "name": "sdram_dq_OBUF[9]"
+                                            },
+                                            {
+                                                "name": "sdram_dq_OBUF[8]"
+                                            },
+                                            {
+                                                "name": "sdram_dq_OBUF[7]"
+                                            },
+                                            {
+                                                "name": "sdram_dq_OBUF[6]"
+                                            },
+                                            {
+                                                "name": "sdram_dq_OBUF[5]"
+                                            },
+                                            {
+                                                "name": "sdram_dq_OBUF[4]"
+                                            },
+                                            {
+                                                "name": "sdram_dq_OBUF[3]"
+                                            },
+                                            {
+                                                "name": "sdram_dq_OBUF[2]"
+                                            },
+                                            {
+                                                "name": "sdram_dq_OBUF[1]"
+                                            },
+                                            {
+                                                "name": "sdram_dq_OBUF[0]"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "probe3",
+                                "id": 3,
+                                "type": "DATA_TRIGGER",
+                                "direction": "IN",
+                                "isVector": true,
+                                "leftIndex": 0,
+                                "rightIndex": 4,
+                                "portIndex": 3,
+                                "nets": [
+                                    {
+                                        "name": "uo_sdram_controller/state",
+                                        "isBus": true,
+                                        "subnets": [
+                                            {
+                                                "name": "uo_sdram_controller/state[4]",
+                                                "parentNetId": 31
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/state[3]",
+                                                "parentNetId": 32
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/state[2]",
+                                                "parentNetId": 33
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/state[1]",
+                                                "parentNetId": 34
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/state[0]",
+                                                "parentNetId": 35
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "probe4",
+                                "id": 4,
+                                "type": "DATA_TRIGGER",
+                                "direction": "IN",
+                                "isVector": true,
+                                "leftIndex": 0,
+                                "rightIndex": 15,
+                                "portIndex": 4,
+                                "nets": [
+                                    {
+                                        "name": "uo_sdram_controller/sdr_dq_in",
+                                        "isBus": true,
+                                        "subnets": [
+                                            {
+                                                "name": "uo_sdram_controller/sdr_dq_in[15]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdr_dq_in[14]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdr_dq_in[13]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdr_dq_in[12]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdr_dq_in[11]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdr_dq_in[10]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdr_dq_in[9]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdr_dq_in[8]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdr_dq_in[7]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdr_dq_in[6]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdr_dq_in[5]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdr_dq_in[4]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdr_dq_in[3]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdr_dq_in[2]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdr_dq_in[1]"
+                                            },
+                                            {
+                                                "name": "uo_sdram_controller/sdr_dq_in[0]"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "probe5",
+                                "id": 5,
+                                "type": "DATA_TRIGGER",
+                                "direction": "IN",
+                                "isVector": false,
+                                "leftIndex": 0,
+                                "rightIndex": 0,
+                                "portIndex": 5,
+                                "nets": [
+                                    {
+                                        "name": "uo_sdram_controller/cas_n_r",
+                                        "isBus": false
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "probe6",
+                                "id": 6,
+                                "type": "DATA_TRIGGER",
+                                "direction": "IN",
+                                "isVector": false,
+                                "leftIndex": 0,
+                                "rightIndex": 0,
+                                "portIndex": 6,
+                                "nets": [
+                                    {
+                                        "name": "uo_sdram_controller/ras_n_r",
+                                        "isBus": false
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "probe7",
+                                "id": 7,
+                                "type": "DATA_TRIGGER",
+                                "direction": "IN",
+                                "isVector": false,
+                                "leftIndex": 0,
+                                "rightIndex": 0,
+                                "portIndex": 7,
+                                "nets": [
+                                    {
+                                        "name": "uo_sdram_controller/sdr_dq_oe",
+                                        "isBus": false
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "probe8",
+                                "id": 8,
+                                "type": "DATA_TRIGGER",
+                                "direction": "IN",
+                                "isVector": false,
+                                "leftIndex": 0,
+                                "rightIndex": 0,
+                                "portIndex": 8,
+                                "nets": [
+                                    {
+                                        "name": "uo_sdram_controller/we_n_r",
+                                        "isBus": false
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "parent_nets": [
+                    {
+                        "id": 31,
+                        "name": "uo_sdram_controller/state[4]",
+                        "state_reg": [
+                            {
+                                "name": "uo_sdram_controller/state_reg[4]",
+                                "states": [
+                                    {
+                                        "name": "S_INIT_NOP",
+                                        "val": "00000"
+                                    },
+                                    {
+                                        "name": "S_INIT_PRE",
+                                        "val": "00001"
+                                    },
+                                    {
+                                        "name": "S_INIT_TRP",
+                                        "val": "00010"
+                                    },
+                                    {
+                                        "name": "S_INIT_AR1",
+                                        "val": "00011"
+                                    },
+                                    {
+                                        "name": "S_INIT_TRF1",
+                                        "val": "00100"
+                                    },
+                                    {
+                                        "name": "S_INIT_AR2",
+                                        "val": "00101"
+                                    },
+                                    {
+                                        "name": "S_INIT_TRF2",
+                                        "val": "00110"
+                                    },
+                                    {
+                                        "name": "S_INIT_MRS",
+                                        "val": "00111"
+                                    },
+                                    {
+                                        "name": "S_INIT_TMRD",
+                                        "val": "01000"
+                                    },
+                                    {
+                                        "name": "S_INIT_DONE",
+                                        "val": "01001"
+                                    },
+                                    {
+                                        "name": "S_IDLE",
+                                        "val": "01010"
+                                    },
+                                    {
+                                        "name": "S_ACTIVE",
+                                        "val": "01011"
+                                    },
+                                    {
+                                        "name": "S_TRCD",
+                                        "val": "01100"
+                                    },
+                                    {
+                                        "name": "S_READ",
+                                        "val": "01101"
+                                    },
+                                    {
+                                        "name": "S_CL",
+                                        "val": "01110"
+                                    },
+                                    {
+                                        "name": "S_RD",
+                                        "val": "01111"
+                                    },
+                                    {
+                                        "name": "S_WRITE",
+                                        "val": "10000"
+                                    },
+                                    {
+                                        "name": "S_WD",
+                                        "val": "10001"
+                                    },
+                                    {
+                                        "name": "S_TWR",
+                                        "val": "10010"
+                                    },
+                                    {
+                                        "name": "S_PRE",
+                                        "val": "10011"
+                                    },
+                                    {
+                                        "name": "S_TRP",
+                                        "val": "10100"
+                                    },
+                                    {
+                                        "name": "S_AR",
+                                        "val": "10101"
+                                    },
+                                    {
+                                        "name": "S_TRFC",
+                                        "val": "10110"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": 32,
+                        "name": "uo_sdram_controller/state[3]",
+                        "state_reg": [
+                            {
+                                "name": "uo_sdram_controller/state_reg[3]",
+                                "states": [
+                                    {
+                                        "name": "S_INIT_NOP",
+                                        "val": "00000"
+                                    },
+                                    {
+                                        "name": "S_INIT_PRE",
+                                        "val": "00001"
+                                    },
+                                    {
+                                        "name": "S_INIT_TRP",
+                                        "val": "00010"
+                                    },
+                                    {
+                                        "name": "S_INIT_AR1",
+                                        "val": "00011"
+                                    },
+                                    {
+                                        "name": "S_INIT_TRF1",
+                                        "val": "00100"
+                                    },
+                                    {
+                                        "name": "S_INIT_AR2",
+                                        "val": "00101"
+                                    },
+                                    {
+                                        "name": "S_INIT_TRF2",
+                                        "val": "00110"
+                                    },
+                                    {
+                                        "name": "S_INIT_MRS",
+                                        "val": "00111"
+                                    },
+                                    {
+                                        "name": "S_INIT_TMRD",
+                                        "val": "01000"
+                                    },
+                                    {
+                                        "name": "S_INIT_DONE",
+                                        "val": "01001"
+                                    },
+                                    {
+                                        "name": "S_IDLE",
+                                        "val": "01010"
+                                    },
+                                    {
+                                        "name": "S_ACTIVE",
+                                        "val": "01011"
+                                    },
+                                    {
+                                        "name": "S_TRCD",
+                                        "val": "01100"
+                                    },
+                                    {
+                                        "name": "S_READ",
+                                        "val": "01101"
+                                    },
+                                    {
+                                        "name": "S_CL",
+                                        "val": "01110"
+                                    },
+                                    {
+                                        "name": "S_RD",
+                                        "val": "01111"
+                                    },
+                                    {
+                                        "name": "S_WRITE",
+                                        "val": "10000"
+                                    },
+                                    {
+                                        "name": "S_WD",
+                                        "val": "10001"
+                                    },
+                                    {
+                                        "name": "S_TWR",
+                                        "val": "10010"
+                                    },
+                                    {
+                                        "name": "S_PRE",
+                                        "val": "10011"
+                                    },
+                                    {
+                                        "name": "S_TRP",
+                                        "val": "10100"
+                                    },
+                                    {
+                                        "name": "S_AR",
+                                        "val": "10101"
+                                    },
+                                    {
+                                        "name": "S_TRFC",
+                                        "val": "10110"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": 33,
+                        "name": "uo_sdram_controller/state[2]",
+                        "state_reg": [
+                            {
+                                "name": "uo_sdram_controller/state_reg[2]",
+                                "states": [
+                                    {
+                                        "name": "S_INIT_NOP",
+                                        "val": "00000"
+                                    },
+                                    {
+                                        "name": "S_INIT_PRE",
+                                        "val": "00001"
+                                    },
+                                    {
+                                        "name": "S_INIT_TRP",
+                                        "val": "00010"
+                                    },
+                                    {
+                                        "name": "S_INIT_AR1",
+                                        "val": "00011"
+                                    },
+                                    {
+                                        "name": "S_INIT_TRF1",
+                                        "val": "00100"
+                                    },
+                                    {
+                                        "name": "S_INIT_AR2",
+                                        "val": "00101"
+                                    },
+                                    {
+                                        "name": "S_INIT_TRF2",
+                                        "val": "00110"
+                                    },
+                                    {
+                                        "name": "S_INIT_MRS",
+                                        "val": "00111"
+                                    },
+                                    {
+                                        "name": "S_INIT_TMRD",
+                                        "val": "01000"
+                                    },
+                                    {
+                                        "name": "S_INIT_DONE",
+                                        "val": "01001"
+                                    },
+                                    {
+                                        "name": "S_IDLE",
+                                        "val": "01010"
+                                    },
+                                    {
+                                        "name": "S_ACTIVE",
+                                        "val": "01011"
+                                    },
+                                    {
+                                        "name": "S_TRCD",
+                                        "val": "01100"
+                                    },
+                                    {
+                                        "name": "S_READ",
+                                        "val": "01101"
+                                    },
+                                    {
+                                        "name": "S_CL",
+                                        "val": "01110"
+                                    },
+                                    {
+                                        "name": "S_RD",
+                                        "val": "01111"
+                                    },
+                                    {
+                                        "name": "S_WRITE",
+                                        "val": "10000"
+                                    },
+                                    {
+                                        "name": "S_WD",
+                                        "val": "10001"
+                                    },
+                                    {
+                                        "name": "S_TWR",
+                                        "val": "10010"
+                                    },
+                                    {
+                                        "name": "S_PRE",
+                                        "val": "10011"
+                                    },
+                                    {
+                                        "name": "S_TRP",
+                                        "val": "10100"
+                                    },
+                                    {
+                                        "name": "S_AR",
+                                        "val": "10101"
+                                    },
+                                    {
+                                        "name": "S_TRFC",
+                                        "val": "10110"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": 34,
+                        "name": "uo_sdram_controller/state[1]",
+                        "state_reg": [
+                            {
+                                "name": "uo_sdram_controller/state_reg[1]",
+                                "states": [
+                                    {
+                                        "name": "S_INIT_NOP",
+                                        "val": "00000"
+                                    },
+                                    {
+                                        "name": "S_INIT_PRE",
+                                        "val": "00001"
+                                    },
+                                    {
+                                        "name": "S_INIT_TRP",
+                                        "val": "00010"
+                                    },
+                                    {
+                                        "name": "S_INIT_AR1",
+                                        "val": "00011"
+                                    },
+                                    {
+                                        "name": "S_INIT_TRF1",
+                                        "val": "00100"
+                                    },
+                                    {
+                                        "name": "S_INIT_AR2",
+                                        "val": "00101"
+                                    },
+                                    {
+                                        "name": "S_INIT_TRF2",
+                                        "val": "00110"
+                                    },
+                                    {
+                                        "name": "S_INIT_MRS",
+                                        "val": "00111"
+                                    },
+                                    {
+                                        "name": "S_INIT_TMRD",
+                                        "val": "01000"
+                                    },
+                                    {
+                                        "name": "S_INIT_DONE",
+                                        "val": "01001"
+                                    },
+                                    {
+                                        "name": "S_IDLE",
+                                        "val": "01010"
+                                    },
+                                    {
+                                        "name": "S_ACTIVE",
+                                        "val": "01011"
+                                    },
+                                    {
+                                        "name": "S_TRCD",
+                                        "val": "01100"
+                                    },
+                                    {
+                                        "name": "S_READ",
+                                        "val": "01101"
+                                    },
+                                    {
+                                        "name": "S_CL",
+                                        "val": "01110"
+                                    },
+                                    {
+                                        "name": "S_RD",
+                                        "val": "01111"
+                                    },
+                                    {
+                                        "name": "S_WRITE",
+                                        "val": "10000"
+                                    },
+                                    {
+                                        "name": "S_WD",
+                                        "val": "10001"
+                                    },
+                                    {
+                                        "name": "S_TWR",
+                                        "val": "10010"
+                                    },
+                                    {
+                                        "name": "S_PRE",
+                                        "val": "10011"
+                                    },
+                                    {
+                                        "name": "S_TRP",
+                                        "val": "10100"
+                                    },
+                                    {
+                                        "name": "S_AR",
+                                        "val": "10101"
+                                    },
+                                    {
+                                        "name": "S_TRFC",
+                                        "val": "10110"
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "id": 35,
+                        "name": "uo_sdram_controller/state[0]",
+                        "state_reg": [
+                            {
+                                "name": "uo_sdram_controller/state_reg[0]",
+                                "states": [
+                                    {
+                                        "name": "S_INIT_NOP",
+                                        "val": "00000"
+                                    },
+                                    {
+                                        "name": "S_INIT_PRE",
+                                        "val": "00001"
+                                    },
+                                    {
+                                        "name": "S_INIT_TRP",
+                                        "val": "00010"
+                                    },
+                                    {
+                                        "name": "S_INIT_AR1",
+                                        "val": "00011"
+                                    },
+                                    {
+                                        "name": "S_INIT_TRF1",
+                                        "val": "00100"
+                                    },
+                                    {
+                                        "name": "S_INIT_AR2",
+                                        "val": "00101"
+                                    },
+                                    {
+                                        "name": "S_INIT_TRF2",
+                                        "val": "00110"
+                                    },
+                                    {
+                                        "name": "S_INIT_MRS",
+                                        "val": "00111"
+                                    },
+                                    {
+                                        "name": "S_INIT_TMRD",
+                                        "val": "01000"
+                                    },
+                                    {
+                                        "name": "S_INIT_DONE",
+                                        "val": "01001"
+                                    },
+                                    {
+                                        "name": "S_IDLE",
+                                        "val": "01010"
+                                    },
+                                    {
+                                        "name": "S_ACTIVE",
+                                        "val": "01011"
+                                    },
+                                    {
+                                        "name": "S_TRCD",
+                                        "val": "01100"
+                                    },
+                                    {
+                                        "name": "S_READ",
+                                        "val": "01101"
+                                    },
+                                    {
+                                        "name": "S_CL",
+                                        "val": "01110"
+                                    },
+                                    {
+                                        "name": "S_RD",
+                                        "val": "01111"
+                                    },
+                                    {
+                                        "name": "S_WRITE",
+                                        "val": "10000"
+                                    },
+                                    {
+                                        "name": "S_WD",
+                                        "val": "10001"
+                                    },
+                                    {
+                                        "name": "S_TWR",
+                                        "val": "10010"
+                                    },
+                                    {
+                                        "name": "S_PRE",
+                                        "val": "10011"
+                                    },
+                                    {
+                                        "name": "S_TRP",
+                                        "val": "10100"
+                                    },
+                                    {
+                                        "name": "S_AR",
+                                        "val": "10101"
+                                    },
+                                    {
+                                        "name": "S_TRFC",
+                                        "val": "10110"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
